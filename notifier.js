@@ -49,6 +49,7 @@ var Hoptoad = {
     var message   = Hoptoad.escapeText(error.message   || 'Unknown error.');
     var component = Hoptoad.escapeText(error.component || 'js');
     var userAgent = Hoptoad.escapeText(navigator.userAgent || 'Unknown');
+    var requestURI = Hoptoad.escapeText(window.location.href || '');
     var backtrace = Hoptoad.generateBacktrace(error);
 
     if (Hoptoad.trim(url) == '' && Hoptoad.trim(component) == '') {
@@ -62,6 +63,7 @@ var Hoptoad = {
           error['cgi-data'] = {};
       }
       error['cgi-data']['HTTP_USER_AGENT'] = userAgent;
+      error['cgi-data']['REQUEST_URI'] = requestURI;
 
       for (var i = 0; i < 3; i++) {
         var type = methods[i];
